@@ -1,7 +1,27 @@
+# macOS
 .DS_Store
+
+# environment variables
 .env
-/node_modules/
+
+# dependencies
+node_modules/
 
 # React Router
-/.react-router/
-/build/
+.react-router/
+
+# build files
+build/
+dist/
+
+# uploads
+uploads/
+
+# logs
+*.log
+
+# vite
+.vite/
+
+# coverage
+coverage/
