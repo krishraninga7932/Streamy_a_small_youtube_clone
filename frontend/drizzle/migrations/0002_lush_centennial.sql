@@ -1,0 +1,1 @@
+ALTER TABLE "videos" RENAME COLUMN "video_url" TO "video_urls";
