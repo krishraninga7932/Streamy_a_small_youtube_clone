@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-router/node": "7.15.0",
     "@react-router/serve": "7.15.0",
+    "@videojs/themes": "^1.0.1",
     "axios": "^1.16.0",
     "date-fns": "^4.1.0",
     "dotenv": "^17.4.2",
@@ -21,8 +22,11 @@
     "plyr": "^3.8.4",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "react-plyr": "^2.2.0",
-    "react-router": "7.15.0"
+    "react-router": "7.15.0",
+    "video.js": "^8.23.7",
+    "videojs-contrib-quality-levels": "^4.1.0",
+    "videojs-hls-quality-selector": "^2.0.0",
+    "videojs-http-source-selector": "^1.1.6"
   },
   "devDependencies": {
     "@react-router/dev": "7.15.0",

@@ -13,3 +13,57 @@ body {
     color-scheme: dark;
   }
 }
+.video-js .vjs-time-control {
+  display: block !important;
+}
+
+.video-js .vjs-current-time,
+.video-js .vjs-duration,
+.video-js .vjs-time-divider {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+
+
+
+.vjs-menu li.vjs-selected{
+  background-color: #8B5CF6 !important;
+  color: #fff !important;
+}
+
+
+
+/* PROGRESS FILLED COLOR */
+
+.video-js .vjs-play-progress {
+  background-color: #8b5cf6 !important;
+}
+
+
+
+/* HANDLE / CIRCLE */
+
+.video-js .vjs-play-progress::before {
+  color: #8b5cf6 !important;
+}
+
+
+
+/* LOADED BUFFER COLOR */
+
+.video-js .vjs-load-progress div {
+  background: rgba(139, 92, 246, 0.4) !important;
+}
+
+
+
+/* TOTAL BAR BACKGROUND */
+
+.video-js .vjs-progress-holder {
+  background: rgba(255,255,255,0.2) !important;
+}
+
+
+
+
