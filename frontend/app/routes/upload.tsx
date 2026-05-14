@@ -41,6 +41,9 @@ export async function action({ request }: { request: Request }) {
         const visibility =
             formData.get("visibility") as string;
 
+        // short video
+        const isShort = formData.get("isShort") === "true"
+
         // FILES
         const videoFile =
             formData.get("video") as File;
@@ -99,6 +102,8 @@ export async function action({ request }: { request: Request }) {
             isPublished:
                 visibility === "Public",
 
+            isShort,
+
         });
 
         console.log(res.data);
@@ -132,6 +137,8 @@ export default function UploadPage() {
 
     const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
 
+    const [isShort, setIsShort] = useState(false)
+
     const [visibility, setVisibility] = useState<"Public" | "Private">(
         "Public"
     );
@@ -141,9 +148,25 @@ export default function UploadPage() {
     ) => {
         const file = e.target.files?.[0];
 
-        if (file) {
-            setVideoFile(file);
+        if (!file) {
+            return
         }
+        setVideoFile(file);
+
+
+        // CREATE TEMP VIDEO
+        const video = document.createElement("video");
+        video.preload = "metadata"
+        video.onloadedmetadata = () => {
+            const isVertical = video.videoHeight > video.videoWidth;
+            const isShortVideo = video.duration <= 60;
+            const finalResult = isVertical && isShortVideo;
+            setIsShort(finalResult)
+            console.log("Is Short:", finalResult);
+        }
+        video.src = URL.createObjectURL(file)
+
+
     };
 
     const handleThumbnailChange = (
@@ -440,6 +463,12 @@ export default function UploadPage() {
                                     type="hidden"
                                     name="visibility"
                                     value={visibility}
+                                />
+
+                                <input
+                                    type="hidden"
+                                    name="isShort"
+                                    value={String(isShort)}
                                 />
 
                             </div>

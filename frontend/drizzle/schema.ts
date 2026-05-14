@@ -28,6 +28,8 @@ export const videos = pgTable("videos", {
 
   isPublished: boolean("is_published").default(true),
 
+  isShort: boolean("is_short").default(false),
+
   // createdAt: timestamp("created_at").defaultNow(),
   // drizzle/schema.ts
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),

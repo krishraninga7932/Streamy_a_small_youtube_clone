@@ -6,4 +6,6 @@ export default [
     route("upload", "routes/upload.tsx"),
 
     route("watch/:id", "routes/watch.$id.tsx"),
+
+    route("shorts", "routes/shorts.tsx"),
 ] satisfies RouteConfig; 

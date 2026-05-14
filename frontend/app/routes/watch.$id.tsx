@@ -3,12 +3,14 @@ import { videos } from "../../drizzle/schema";
 
 import {
   Link,
+  NavLink,
   useLoaderData,
 } from "react-router";
 
 import {
   useRef,
   useEffect,
+  useState
 } from "react";
 
 import {
@@ -21,8 +23,15 @@ import {
   Menu,
   Search,
   Bell,
+  Home as HomeIcon,
+  PlaySquare,
   User,
+  Video,
   Clapperboard,
+  TrendingUp,
+  Gamepad2,
+  History,
+  Music2,
   CheckCircle2,
 } from "lucide-react";
 
@@ -87,6 +96,65 @@ export async function loader({
 
 
 
+
+const SIDEBAR_LINKS = [
+
+  {
+    icon: HomeIcon,
+    label: "Home",
+    path: "/",
+  },
+
+  {
+    icon: Clapperboard,
+    label: "Shorts",
+    path: "/shorts",
+  },
+
+  {
+    icon: PlaySquare,
+    label: "Subscriptions",
+    path: "/subscriptions",
+  },
+
+  { divider: true },
+
+  {
+    icon: History,
+    label: "History",
+    path: "/history",
+  },
+
+  {
+    icon: Video,
+    label: "Your videos",
+    path: "/your-videos",
+  },
+
+  { divider: true },
+
+  {
+    icon: TrendingUp,
+    label: "Trending",
+    path: "/trending",
+  },
+
+  {
+    icon: Gamepad2,
+    label: "Gaming",
+    path: "/gaming",
+  },
+
+  {
+    icon: Music2,
+    label: "Music",
+    path: "/music",
+  },
+
+];
+
+
+
 // ================= TYPES =================
 
 type VideoQuality = {
@@ -102,6 +170,10 @@ type VideoQuality = {
 // ================= COMPONENT =================
 
 export default function Watch() {
+
+  const [sidebarOpen,
+    setSidebarOpen] =
+    useState(false);
 
   const videoRef =
     useRef<HTMLVideoElement | null>(
@@ -631,7 +703,13 @@ export default function Watch() {
 
         <div className="flex items-center gap-[15px]">
 
-          <button className="flex h-[40px] w-[40px] items-center justify-center rounded-full text-[#9ca3af] transition hover:bg-[#1a1a24] hover:text-white">
+          <button
+            onClick={() =>
+              setSidebarOpen(
+                !sidebarOpen
+              )
+            }
+            className="flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-full text-[#9ca3af] transition hover:bg-[#1a1a24] hover:text-white">
 
             <Menu size={20} />
 
@@ -702,6 +780,108 @@ export default function Watch() {
         </div>
 
       </header>
+
+      {/* SIDEBAR */}
+
+      <aside
+        className={`fixed
+                    left-0
+                    top-[65px]
+                    z-40
+                    h-[calc(100vh-65px)]
+
+                    overflow-hidden
+
+                    border-r
+                    border-[#1f1f2a]
+
+                    bg-[#0f0f14]/95
+                    backdrop-blur-md
+
+                    transition-all
+                    duration-300 
+                    ${sidebarOpen
+
+            ? "w-[240px] p-[15px_10px]"
+
+            : "w-0 p-0"
+          }`}
+      >
+
+        <div
+          className={`${sidebarOpen
+
+            ? "opacity-100"
+
+            : "opacity-0"
+
+            } transition-opacity duration-300`}
+        >
+
+          {SIDEBAR_LINKS.map(
+            (item, index) => {
+
+              if ("divider" in item) {
+
+                return (
+
+                  <hr
+                    key={index}
+                    className="my-[15px] border-[#1f1f2a]"
+                  />
+
+                );
+
+              }
+
+              const Icon = item.icon!;
+
+              return (
+
+                <NavLink
+
+                  to={item.path}
+
+                  key={index}
+
+                  className={({ isActive }) => `
+
+                      mb-[5px]
+                      flex
+                      cursor-pointer
+                      items-center
+                      gap-[14px]
+                      rounded-[12px]
+                      px-[15px]
+                      py-[12px]
+                      transition
+
+                      ${isActive
+
+                      ? "bg-[#1e1b4b] text-white"
+
+                      : "text-[#9ca3af] hover:bg-[#1a1a24] hover:text-white"
+                    }
+
+                    `}
+                >
+
+                  <Icon size={18} />
+
+                  <span>
+                    {item.label}
+                  </span>
+
+                </NavLink>
+
+              );
+
+            }
+          )}
+
+        </div>
+
+      </aside>
 
 
 

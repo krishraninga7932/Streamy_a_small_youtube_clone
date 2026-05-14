@@ -1,6 +1,6 @@
 import { db } from "../../drizzle/db";
 import { videos } from "../../drizzle/schema";
-import { desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import StreamyHome from "../components/StreamyHome";
 
 export function meta() {
@@ -12,7 +12,7 @@ export function meta() {
 
 export async function loader() {
   try {
-    const VIDEOS = await db.select().from(videos).orderBy(desc(videos.createdAt));
+    const VIDEOS = await db.select().from(videos).where(eq(videos.isShort, false)).orderBy(desc(videos.createdAt));
     console.log("Loaded videos:", VIDEOS);
     return { VIDEOS };
   } catch (error) {

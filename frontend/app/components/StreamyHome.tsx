@@ -1,5 +1,5 @@
 import { formatDistanceToNowStrict } from "date-fns";
-import { Link, useLoaderData } from "react-router";
+import { Link, useLoaderData, NavLink } from "react-router";
 import { useState } from "react";
 import {
   Menu,
@@ -20,20 +20,59 @@ import {
 } from "lucide-react";
 
 const SIDEBAR_LINKS = [
-  { icon: HomeIcon, label: "Home", active: true },
-  { icon: Clapperboard, label: "Shorts" },
-  { icon: PlaySquare, label: "Subscriptions" },
+
+  {
+    icon: HomeIcon,
+    label: "Home",
+    path: "/",
+  },
+
+  {
+    icon: Clapperboard,
+    label: "Shorts",
+    path: "/shorts",
+  },
+
+  {
+    icon: PlaySquare,
+    label: "Subscriptions",
+    path: "/subscriptions",
+  },
 
   { divider: true },
 
-  { icon: History, label: "History" },
-  { icon: Video, label: "Your videos" },
+  {
+    icon: History,
+    label: "History",
+    path: "/history",
+  },
+
+  {
+    icon: Video,
+    label: "Your videos",
+    path: "/your-videos",
+  },
 
   { divider: true },
 
-  { icon: TrendingUp, label: "Trending" },
-  { icon: Gamepad2, label: "Gaming" },
-  { icon: Music2, label: "Music" },
+  {
+    icon: TrendingUp,
+    label: "Trending",
+    path: "/trending",
+  },
+
+  {
+    icon: Gamepad2,
+    label: "Gaming",
+    path: "/gaming",
+  },
+
+  {
+    icon: Music2,
+    label: "Music",
+    path: "/music",
+  },
+
 ];
 
 const CATEGORIES = [
@@ -155,15 +194,15 @@ export default function Home() {
 
         <aside
           className={`overflow-hidden border-r border-[#1f1f2a] bg-[#0f0f14] transition-all duration-300 ${sidebarOpen
-              ? "w-[240px] p-[15px_10px]"
-              : "w-0 p-0"
+            ? "w-[240px] p-[15px_10px]"
+            : "w-0 p-0"
             }`}
         >
 
           <div
             className={`${sidebarOpen
-                ? "opacity-100"
-                : "opacity-0"
+              ? "opacity-100"
+              : "opacity-0"
               } transition-opacity duration-300`}
           >
 
@@ -184,12 +223,32 @@ export default function Home() {
 
               return (
 
-                <div
+                <NavLink
+
+                  to={item.path || "/"}
+
                   key={index}
-                  className={`mb-[5px] flex cursor-pointer items-center gap-[14px] rounded-[12px] px-[15px] py-[12px] transition ${item.active
+
+                  className={({ isActive }) => `
+
+                    mb-[5px]
+                    flex
+                    cursor-pointer
+                    items-center
+                    gap-[14px]
+                    rounded-[12px]
+                    px-[15px]
+                    py-[12px]
+                    transition
+
+                    ${isActive
+
                       ? "bg-[#1e1b4b] text-white"
+
                       : "text-[#9ca3af] hover:bg-[#1a1a24] hover:text-white"
-                    }`}
+                    }
+
+                  `}
                 >
 
                   <Icon size={18} />
@@ -198,7 +257,7 @@ export default function Home() {
                     {item.label}
                   </span>
 
-                </div>
+                </NavLink>
 
               );
 

@@ -23,6 +23,7 @@
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-router": "7.15.0",
+    "tailwind-scrollbar-hide": "^4.0.0",
     "video.js": "^8.23.7",
     "videojs-contrib-quality-levels": "^4.1.0",
     "videojs-hls-quality-selector": "^2.0.0",
